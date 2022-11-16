@@ -7,6 +7,8 @@ by Grzegorz Potocki
 #include <iostream>
 #include <cmath>
 #include <limits>
+#include <string>
+#include <string.h>
 
 using namespace std;
 
@@ -90,9 +92,19 @@ int GCD_of_3(int a, int b, int d){
         return d;
     }
 }
-char encrypt(char a){
-    char result;
-    return result;
+void encrypt(char a[]){
+    char ch;
+    for(int i=0; i<a[i]!='\0'; i++){
+        ch = a[i];
+        if(ch>='a' && ch<='z'){
+            ch=ch + 25;
+            if(ch>'z') {
+               ch=ch-'z'+'a'-1;
+            }
+            a[i] = ch;
+         }
+    }
+    return ch;
 }
 int main()
 {
@@ -200,13 +212,13 @@ int main()
             break;
         }
         case 65:{   //hw4
-            string text;
+            char text[100];
             cout<<"Enter message to cipher: ";
 //            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 //            cin.getline(text, 100);
             cin>>text;
-            char result=encrypt(text);
-            cout<<text;
+            char result[100]=encrypt(text);
+            cout<<result;
             break;
         }
         default:{
