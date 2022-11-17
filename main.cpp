@@ -94,17 +94,23 @@ int GCD_of_3(int a, int b, int d){
 }
 void encrypt(char a[]){
     char ch;
-    for(int i=0; i<a[i]!='\0'; i++){
+    for(int i=0; a[i]!='\0'; i++){
         ch = a[i];
         if(ch>='a' && ch<='z'){
-            ch=ch + 25;
+            ch=ch+25;
             if(ch>'z') {
-               ch=ch-'z'+'a'-1;
+                ch=ch+1;
             }
-            a[i] = ch;
-         }
+        a[i]=ch;
+        }
+        else if(ch>='A' && ch <='Z'){
+            ch=ch+25;
+            if(ch>'z'){
+                ch=ch-'Z'-'A';
+            }
+        a[i]=ch;
+        }
     }
-    return ch;
 }
 int main()
 {
@@ -214,11 +220,11 @@ int main()
         case 65:{   //hw4
             char text[100];
             cout<<"Enter message to cipher: ";
+            cin>>text;
 //            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 //            cin.getline(text, 100);
-            cin>>text;
-            char result[100]=encrypt(text);
-            cout<<result;
+            encrypt(text);
+            cout<<text;
             break;
         }
         default:{
