@@ -7,7 +7,6 @@ by Grzegorz Potocki
 #include <iostream>
 #include <cmath>
 #include <limits>
-#include <string>
 #include <string.h>
 
 using namespace std;
@@ -60,10 +59,11 @@ bool is_prime(int n){
         }
     }
 }
-void sphere(float &r){  //idk how to do it
-    float result1=4*M_PI*pow(r, 2);
-    float result2=(4*M_PI*pow(r, 3))/3;
-    r=result1;
+void sphere(float &r){
+    float area=4*M_PI*pow(r, 2);
+    float volume=(4*M_PI*pow(r, 3))/3;
+    std::cout<<"area: "<<area<<std::endl;
+    std::cout<<"volume: "<<volume<<std::endl;
 }
 float h_mean(int a, int b, int c){
     float result=3/(pow(a, -1)+pow(b, -1)+pow(c, -1));
@@ -92,23 +92,23 @@ int GCD_of_3(int a, int b, int d){
         return d;
     }
 }
-void encrypt(char a[]){
-    char ch;
-    for(int i=0; a[i]!='\0'; i++){
-        ch = a[i];
-        if(ch>='a' && ch<='z'){
-            ch=ch+25;
-            if(ch>'z') {
-                ch=ch+1;
-            }
-        a[i]=ch;
+void cipher(char a[]){
+    for(int i=0; i<strlen(a); i++){
+        if(a[i]>='A' && a[i]<='Z'){
+            a[i]=('Z'-(a[i]-'A'));
         }
-        else if(ch>='A' && ch <='Z'){
-            ch=ch+25;
-            if(ch>'z'){
-                ch=ch-'Z'-'A';
-            }
-        a[i]=ch;
+        else if(a[i]>='a' && a[i]<='z'){
+            a[i]=('z'-(a[i]-'a'));
+        }
+    }
+}
+void decipher(char a[]){
+    for(int i=0; i<strlen(a); i++){
+        if(a[i]>='A' && a[i]<='Z'){
+            a[i]=('A'-(a[i]-'Z'));
+        }
+        else if(a[i]>='a' && a[i]<='z'){
+            a[i]=('a'-(a[i]-'z'));
         }
     }
 }
@@ -167,7 +167,7 @@ int main()
             cout<<number1;
             break;
         }
-        case 53:{   //ex5 weird question???
+        case 53:{   //ex5
             int number1;
             cout<<"Enter number to check is it a prime (smaller than 100): ";
             cin>>number1;
@@ -180,10 +180,9 @@ int main()
             cout<<"Enter radius: ";
             cin>>r;
             sphere(r);
-            cout<<r;
             break;
         }
-        case 55:{   //hw1
+        case 55:{   //homework1
             int number1, number2, number3;
             cout<<"Enter number 1: ";
             cin>>number1;
@@ -195,7 +194,7 @@ int main()
             cout<<result;
             break;
         }
-        case 56:{   //hw2
+        case 56:{   //homework2
             int number1, number2;
             cout<<"Enter number 1: ";
             cin>>number1;
@@ -205,7 +204,7 @@ int main()
             cout<<result;
             break;
         }
-        case 57:{   //hw3
+        case 57:{   //homework3
             int number1, number2, number3;
             cout<<"Enter number 1: ";
             cin>>number1;
@@ -217,14 +216,15 @@ int main()
             cout<<result;
             break;
         }
-        case 65:{   //hw4
+        case 65:{   //homework4
             char text[100];
             cout<<"Enter message to cipher: ";
-            cin>>text;
-//            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-//            cin.getline(text, 100);
-            encrypt(text);
-            cout<<text;
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cin.getline(text, 100);
+            cipher(text);
+            cout<<text<<endl;
+            decipher(text);
+            cout<<text<<endl;
             break;
         }
         default:{
