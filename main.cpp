@@ -12,84 +12,84 @@ by Grzegorz Potocki
 using namespace std;
 
 int mini_of_2(int a, int b){
-    if(a<b){
+    if(a<b){                        //if a is smaller than b then return a
         return a;
     }
-    else{
+    else{                           //else return b - simple
         return b;
     }
 }
 int mini_of_4(int a, int b, int c, int d){
-    int result1 = mini_of_2(a, b);
-    int result2 = mini_of_2(c, d);
-    if(result1<result2){
+    int result1 = mini_of_2(a, b);              //declaration variable int "result1" which is the same function as function above
+    int result2 = mini_of_2(c, d);              //the same function as above
+    if(result1<result2){                        //if result1 is smaller than result2 then return result1
         return result1;
     }
-    else{
+    else{                                       //else return result2
         return result2;
     }
 }
 float g_mean(int a, int b, int c){
-    return cbrt(a*b*c);
+    return cbrt(a*b*c);                         //geometric mean of three elements which is the result of multiplying three elements and then taking cube root of result
 }
 void round1(float &a){
-    int result=static_cast<int>(a*10)%10;
-    if(result>=5){
-        a=ceil(a);
+    int result=static_cast<int>(a*10)%10;       //forcing an float variable which is a to be an integer and then multiplying it 10 times and then getting result modulo 10 to get as the result the rest of dividing which is equal to decimal place value
+    if(result>=5){                              //check if decimal place value is greater than 5
+        a=ceil(a);                              //then round number up
     }
-    else{
-        a=floor(a);
+    else{                                       //in every other case(when decimal value is smaller than 5)
+        a=floor(a);                             //then round number down
     }
 }
 bool is_prime(int n){
-    if(n==0 || n==1){
-        return false;
+    if(n==0 || n==1){                           //check if value of n is equal to 0 or 1
+        return false;                           //if it is then n is not a prime number because 0 and 1 are not prime
     }
-    if(n==2){
-        return true;
+    if(n==2){                                   //check if value of n is equal to 2
+        return true;                            //if it is then n is a prime because 2 is one and only even number which is prime
     }
-    else{
-        for(int i=2; i<100; i++){
-            if(n%i==0){
-                return false;
+    else{                                       //in every other case(when n is not 0, 1 or 2)
+        for(int i=2; i<100; i++){               //for loop as long as i form 2 is smaller than 100
+            if(n%i==0){                         //check if value of n modulo i is equal to 0(loop is checking that it is possible to divide n by every i up to n)
+                return false;                   //if it is then the value of n is not prime
             }
             else{
-                return true;
+                return true;                    //if it is not then the value of n is prime
             }
         }
     }
 }
 void sphere(float &r){
-    float area=4*M_PI*pow(r, 2);
-    float volume=(4*M_PI*pow(r, 3))/3;
+    float area=4*M_PI*pow(r, 2);                //calculating the value of area of sphere from formula
+    float volume=(4*M_PI*pow(r, 3))/3;          //calculating the value of volume of sphere from formula
     std::cout<<"area: "<<area<<std::endl;
     std::cout<<"volume: "<<volume<<std::endl;
 }
 float h_mean(int a, int b, int c){
-    float result=3/(pow(a, -1)+pow(b, -1)+pow(c, -1));
+    float result=3/(pow(a, -1)+pow(b, -1)+pow(c, -1));  //calculating the harmonic mean of 3 elements from formula
     return result;
 }
-int GCD_of_2(int a, int b){
+int GCD_of_2(int a, int b){                     //euclidean algorithm
     do{
-        int c= a%b;
-        a=b;
-        b=c;
+        int temp= a%b;                          //at least once create variable int temp(temporary) which is equal to a modulo b
+        a=b;                                    //then just change a with b
+        b=temp;                                 //and change b with temp
     }
-    while(b!=0);
-    if (b==0){
-        return a;
+    while(b!=0);                                //and do it as long as b is not equal zero
+    if (b==0){                                  //but if b is equal to zero
+        return a;                               //then return the result which is the greatest common divisor
     }
 }
 int GCD_of_3(int a, int b, int d){
-    int result=GCD_of_2(a, b);
+    int result=GCD_of_2(a, b);                  //variable int result is equal to the greatest common divisor of a and b
     do{
-        int c=d%result;
-        d=result;
-        result=c;
+        int temp=d%result;                      //at least once create variable int temp which is d mod result
+        d=result;                               //change d with result
+        result=temp;                            //change result with temp
     }
-    while(result!=0);
-    if (result==0){
-        return d;
+    while(result!=0);                           //as long as result is not equal to zero
+    if (result==0){                             //check if result is equal to zero
+        return d;                               //if it is then return d which is the greatest common divisor of a, b and d
     }
 }
 void cipher(char a[]){
